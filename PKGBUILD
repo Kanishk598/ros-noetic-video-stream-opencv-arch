@@ -1,7 +1,8 @@
 pkgname="ros-noetic-video-stream-opencv"
 pkgdesc="Stream device images to ROS topics"
-pkgver="1"
+pkgver="1.1.6"
 pkgrel="1"
+url="https://github.com/ros-drivers/video_stream_opencv.git"
 arch=("any")
 license=("BSD")
 ros_makedepends=(ros-noetic-roscpp
@@ -25,16 +26,17 @@ ros_depends=(ros-noetic-roscpp
   ros-noetic-cv-bridge
   ros-noetic-nodelet)
 depends=(${ros_depends[@]})
-source = "video_stream_opencv_noetic::https://github.com/ros-drivers/video_stream_opencv.git"
+source=("ros_noetic_video_stream_opencv::git://github.com/ros-drivers/video_stream_opencv.git")
+md5sums=('SKIP')
 build() {
         source /usr/share/ros-build-tools/clear-ros-env.sh      # Clear ROS environment to clear PATH related ambiguities
         [ -f /opt/ros/noetic/setup.bash ] && source /opt/ros/noetic/setup.bash  # If setup.bash file exists, then source it
-        [ -d ${srcdir}/build ] || mkdir ${srcdir}/build -p      # Create a build directory
-        cd ${srcdir}/build
-        cmake ${srcdir}/ -DCMAKE_INSTALL_PREFIX=/opt/ros/noetic
+        [ -d ${pkgname}-${pkgver}/build ] || mkdir ${pkgname}-${pkgver}/build -p      # Create a build directory
+        cd ${pkgname}-${pkgver}/build
+        cmake ${pkgname}-${pkgver}/ -DCMAKE_INSTALL_PREFIX=${pkgname}-${pkgver}/opt/ros/noetic
         make
 }
 package() {
-        cd "${srcdir}/build"
-        make DESTDIR="${pkgdir}/" install
+        cd "${pkgname}-${pkgver}/build"
+        make DESTDIR="${pkgdir}-${pkgver}/opt/ros/noetic/" install
 }
