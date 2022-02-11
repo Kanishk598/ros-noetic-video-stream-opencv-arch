@@ -1,8 +1,0 @@
-prefix=/home/kanishk/ros_ws/ros-noetic-video-stream-opencv-arch/src/build/devel
-
-Name: video_stream_opencv
-Description: Description of video_stream_opencv
-Version: 1.1.6
-Cflags: -I/home/kanishk/ros_ws/ros-noetic-video-stream-opencv-arch/src/build/devel/include
-Libs: -L${prefix}/lib 
-Requires: 

@@ -44,12 +44,16 @@ build() {
   [ -d ${srcdir}/build ] || mkdir ${srcdir}/build
   cd ${srcdir}/build
 
-  # Build project
+  # Build project   
   cmake ${srcdir}/${_dir} \
-        -DCATKIN_BUILD_BINARY_PACKAGE=ON \
-        -DCMAKE_INSTALL_PREFIX=/opt/ros/noetic \
-        -DPYTHON_EXECUTABLE=/usr/bin/python \
-        -DSETUPTOOLS_DEB_LAYOUT=OFF
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCATKIN_BUILD_BINARY_PACKAGE=ON \
+            -DCMAKE_INSTALL_PREFIX=/opt/ros/noetic \
+            -DPYTHON_EXECUTABLE=/usr/bin/python3 \
+            -DPYTHON_INCLUDE_DIR=/usr/include/python3.8m \
+            -DPYTHON_LIBRARY=/usr/lib/libpython3.8m.so \
+            -DPYTHON_BASENAME=.cpython-38m \
+            -DSETUPTOOLS_DEB_LAYOUT=OFF
   make
 }
 
